@@ -12,13 +12,10 @@
 
 class Solution:
     def sumOfDistancesInTree(self, n: int, edges: List[List[int]]) -> List[int]:
-
         
         if n == 1:
             return [0]
 
-        
-    
         adjList = defaultdict(list)
 
         for u, v in edges:
