@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/get-equal-substrings-within-budget/description/?envType=daily-question&envId=2024-05-28
+
 class Solution:
     def equalSubstring(self, s: str, t: str, maxCost: int) -> int:
 
