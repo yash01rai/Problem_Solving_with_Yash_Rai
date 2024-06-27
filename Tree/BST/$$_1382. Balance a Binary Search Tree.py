@@ -19,8 +19,8 @@ class Solution:
 
         # Approach
         # We'll get the node values stored in an array using DFS.
-        # Then, using DFS again, we'll create a tree by creating a node with the middle value of the array.
-        # We'll call recursion on both start -> mid - 1 and mid + 1 -> end,
+        # then, using DFS again, we'll create a tree by seeking the middle value of the array as the root value.
+        # then, we'll perform recursion on both left and right side, start -> mid - 1 and mid + 1 -> end
         # assigning recursive calls to node.left and node.right.
 
         nodes = []
