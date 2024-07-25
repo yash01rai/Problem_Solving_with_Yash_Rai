@@ -1,4 +1,50 @@
 class Solution:
+
+    def bfs(self, nodeList, k):
+
+        graph = defaultdict(list)
+        inDegree = [0] * (k + 1)
+
+        for u, v in nodeList:
+            graph[u].append(v)
+            inDegree[v] += 1
+        
+        dq = deque()
+
+        for i in range(len(inDegree)):
+            if i != 0 and inDegree[i] == 0:
+                dq.append(i)
+        
+        result = []
+        # visited = set()
+        while dq:
+            curr_node = dq.popleft()
+
+            # if curr_node in visited:
+            #     return []
+
+            # visited.add(curr_node)
+            
+            result.append(curr_node)
+            k -= 1
+            
+            for neighbour in graph[curr_node]:
+                # if neighbour in visited:
+                #     return []
+
+                inDegree[neighbour] -= 1
+
+                if inDegree[neighbour] == 0:
+                    dq.append(neighbour)
+        
+        if k != 0:
+            return []
+
+        return result
+
+
+
+
     def dfs(self, node, graph, visited, stack, curr_path):
 
         if node in curr_path:
@@ -19,6 +65,8 @@ class Solution:
         return True
 
     def topological_sort(self, graph, totalNodes):
+
+        # for dfs
         curr_path = set()
         visited = set()
         stack = []
@@ -104,13 +152,19 @@ class Solution:
 
         result = [[0] * k  for _ in range(k)]
 
-        rowGraph = self.graphBuilder(rowConditions)
-        colGraph = self.graphBuilder(colConditions)
+        # rowGraph = self.graphBuilder(rowConditions)
+        # colGraph = self.graphBuilder(colConditions)
 
-        leftRight = self.topological_sort(rowGraph, k)
-        topDown = self.topological_sort(colGraph, k)
+        # leftRight = self.topological_sort(rowGraph, k)
+        # topDown = self.topological_sort(colGraph, k)
 
-        if not leftRight or not topDown:
+        leftRight = self.bfs(rowConditions, k)
+        topDown = self.bfs(colConditions, k)
+
+        # print(leftRight)
+        # print(topDown)
+
+        if not leftRight or not topDown or len(leftRight) != len(topDown):
             return []
     
         for i in range(k):
